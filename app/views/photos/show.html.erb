@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+<p>
+  <strong>User:</strong>
+  <%= @photo.user.email %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @photo.title %>
+</p>
+
+<p>
+  <strong>Photo:</strong><br>
+  <img src="<%= @photo.url %>" width="400"/>
+</p>
+
+<%= form_for Comment.new, url:"/comments" do |f| %>
+  <%= f.text_area :message %>
+  <%= f.hidden_field :photo_id, :value => @photo.id %>
+  <%= f.submit "Create" %>
+<% end %>
+
+<% @photo.comments.each do |comment| %>
+<div>
+  <strong> <%= comment.user.email %></strong>
+  says:
+  <%= comment.message %>
+</div>
+<% end %>
+
+<%= link_to 'Edit', edit_photo_path(@photo) %> |
+<%= link_to 'Back', photos_path %>

@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Photos</h1>
+
+<div class="container">
+  <% @photos.each do |photo| %>
+    <div class="card">
+        <img src="<%= photo.url %>" width="400"/>
+        <h3>Title: <%= photo.title %></h3> 
+        <h3>User: <%= photo.user.email %></h3> 
+        <%= link_to 'View', photo %>
+        <%= link_to 'Edit', edit_photo_path(photo) %>
+        <%= link_to 'Delete', photo, method: :delete, data: { confirm: 'Are you sure?' } %><br>
+      <br>
+    </div>
+  <% end %>
+</div>
+
+<br>
+
+<%= link_to 'New Photo', new_photo_path %>
