@@ -5,12 +5,14 @@
 <div class="container">
   <% @photos.each do |photo| %>
     <div class="card">
-        <%= image_tag photo.image, width:'300' %>
+        <%= image_tag photo.image, width:'200' %>
         <h3>Title: <%= photo.title %></h3> 
         <h3>User: <%= photo.user.email %></h3> 
         <%= link_to 'View', photo %>
-        <%= link_to 'Edit', edit_photo_path(photo) %>
-        <%= link_to 'Delete', photo, method: :delete, data: { confirm: 'Are you sure?' } %><br>
+        <% if current_user == photo.user %>
+          <%= link_to 'Edit', edit_photo_path(photo) %>
+          <%= link_to 'Delete', photo, method: :delete, data: { confirm: 'Are you sure?' } %><br>
+        <% end %>
       <br>
     </div>
   <% end %>
